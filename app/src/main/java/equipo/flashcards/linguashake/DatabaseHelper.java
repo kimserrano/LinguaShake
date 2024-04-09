@@ -10,6 +10,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     // nombre de la base de datos
     public static final String databaseName ="Singup.db";
@@ -32,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create Table flashcards(id INTEGER PRIMARY KEY AUTOINCREMENT, frase TEXT, respuesta TEXT)");
 
         // descomentareen la linea 35 para que se inserten los datos de las tarjetas, si no no les va a aparecer contenido
-       //  insertarDatosDeEjemplo(db);
+        insertarDatosDeEjemplo(db);
     }
 
     @Override
@@ -86,41 +89,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public TarjetaObj obtenerProximaTarjeta() {
-        TarjetaObj tarjeta = null;
+    public List<TarjetaObj> obtenerProximaTarjeta() {
+        List<TarjetaObj> tarjetas = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
         try {
-            // para seleccionar una tarjeta aleatoria de la tabla flashcards
-            cursor = db.rawQuery("SELECT * FROM flashcards ORDER BY RANDOM() LIMIT 1", null);
+            // seleccionar las primeras 5 tarjetas de la tabla flashcards
+            cursor = db.rawQuery("SELECT * FROM flashcards LIMIT 5", null);
 
             if (cursor != null && cursor.moveToFirst()) {
-                // índices de las columnas
                 int idIndex = cursor.getColumnIndex("id");
                 int fraseIndex = cursor.getColumnIndex("frase");
                 int respuestaIndex = cursor.getColumnIndex("respuesta");
 
-                // los valores de la fila actual utilizando los índices
-                int id = cursor.getInt(idIndex);
-                String frase = cursor.getString(fraseIndex);
-                String respuesta = cursor.getString(respuestaIndex);
+                // primeras 5 tarjetas y agregarlos a la lista de tarjetas
+                do {
+                    int id = cursor.getInt(idIndex);
+                    String frase = cursor.getString(fraseIndex);
+                    String respuesta = cursor.getString(respuestaIndex);
 
-                //objeto Tarjeta con los valores obtenidos
-                tarjeta = new TarjetaObj(id, frase, respuesta);
+                    TarjetaObj tarjeta = new TarjetaObj(id, frase, respuesta);
+                    tarjetas.add(tarjeta);
+                } while (cursor.moveToNext());
             }
         } catch (SQLiteException e) {
-            Log.e("DatabaseHelper", "Error al obtener la próxima tarjeta: " + e.getMessage());
+            Log.e("DatabaseHelper", "Error al obtener las próximas tarjetas: " + e.getMessage());
         } finally {
-            // Cerrar el cursor y la base de datos
+            // cerrar el cursor y la base de datos
             if (cursor != null) {
                 cursor.close();
             }
             db.close();
         }
 
-        return tarjeta;
+        return tarjetas;
     }
+
 
 
     private void insertarDatosDeEjemplo(SQLiteDatabase db) {
@@ -137,6 +142,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("frase", "How much does it cost?");
         contentValues.put("respuesta", "¿Cuánto cuesta?");
         db.insert("flashcards", null, contentValues);
+
         contentValues.put("frase", "What time is it?");
         contentValues.put("respuesta", "¿Qué hora es?");
         db.insert("flashcards", null, contentValues);
@@ -144,6 +150,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("frase", "I would like a coffee, please.");
         contentValues.put("respuesta", "Quisiera un café, por favor.");
         db.insert("flashcards", null, contentValues);
+
+        contentValues.put("frase", "Hello");
+        contentValues.put("respuesta", "Hola.");
+        db.insert("flashcards", null, contentValues);
+
+        contentValues.put("frase", "Mano.");
+        contentValues.put("respuesta", "Hand.");
+        db.insert("flashcards", null, contentValues);
+
 
     }
 

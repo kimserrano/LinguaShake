@@ -15,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tarjeta extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
@@ -52,6 +55,7 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         fraseTextView = findViewById(R.id.frase_textview);
         respuestaTextView = findViewById(R.id.respuesta_textview);
         ImageButton btnSiguiente = findViewById(R.id.btn_avanzar);
+        ImageButton btnAnterior= findViewById(R.id.btn_retroceder);
 
         // inicializar la base de datos
         databaseHelper = new DatabaseHelper(this);
@@ -62,6 +66,13 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 mostrarNuevaTarjeta();
+            }
+        });
+
+        btnAnterior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarTarjetaAnterior();
             }
         });
         // si da clic en el btn respuesta
@@ -169,20 +180,52 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
                 .start();
     }
 
-    private void mostrarNuevaTarjeta() {
-        // una nueva tarjeta de la base de datos
-        tarjetaActual = databaseHelper.obtenerProximaTarjeta();
+    private List<TarjetaObj> listaTarjetas = new ArrayList<>();
+    private int indexTarjetaActual = 0;
 
-        if (tarjetaActual != null) {
+    private void mostrarNuevaTarjeta() {
+        // si la lista de tarjetas está vacía, obtenemos una nueva lista de la base de datos
+        if (listaTarjetas.isEmpty()) {
+            listaTarjetas = databaseHelper.obtenerProximaTarjeta();
+            // reiniciar el índice de la tarjeta actual
+            indexTarjetaActual = 0;
+        }
+
+        if (!listaTarjetas.isEmpty() && indexTarjetaActual < listaTarjetas.size()) {
+            // tarjeta actual
+            tarjetaActual = listaTarjetas.get(indexTarjetaActual);
+
             // mostrar la frase en el textview
             fraseTextView.setText(tarjetaActual.getFrase());
             // reiniciar el estado de mostrar la respuesta
             isShowingAnswer = false;
+
+            // incrementar el índice para la próxima tarjeta
+            indexTarjetaActual++;
         } else {
-            // si no hay más tarjetas
+            //no hay más tarjetas
             fraseTextView.setText("No hay más tarjetas.");
             respuestaTextView.setText("");
         }
     }
+
+    private void mostrarTarjetaAnterior() {
+        //verificar si hay tarjetas en la lista y si el índice actual es mayor que cero
+        if (!listaTarjetas.isEmpty() && indexTarjetaActual > 0) {
+            // retroceder a la tarjeta anterior
+            indexTarjetaActual--;
+            // la tarjeta anterior
+            tarjetaActual = listaTarjetas.get(indexTarjetaActual);
+            // mostrar la tarjeta anterior en el textview
+            fraseTextView.setText(tarjetaActual.getFrase());
+            // reiniciar el estado de mostrar la respuesta
+            isShowingAnswer = false;
+        } else {
+            // mensaje indicando que no hay más tarjetas anteriores
+            Toast.makeText(this, "No hay más tarjetas anteriores.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }
