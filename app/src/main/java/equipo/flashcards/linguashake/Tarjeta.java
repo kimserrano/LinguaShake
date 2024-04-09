@@ -123,9 +123,20 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         if (isShowingAnswer) {
             // voltearla hacia atrás para ocultar la respuesta
             flip(cardView, R.drawable.flip_backward);
+            // hace invisible la respuesta
+            respuestaTextView.setVisibility(View.GONE);
+            // hace visible la frase
+            fraseTextView.setVisibility(View.VISIBLE);
         } else {
             // voltearla hacia adelante para mostrar la respuesta
             flip(cardView, R.drawable.flip_forward);
+            // hace visible la respuesta
+            respuestaTextView.setVisibility(View.VISIBLE);
+            // pone la respuesta
+            respuestaTextView.setText(tarjetaActual.getRespuesta());
+            // hace invisible la frase
+            fraseTextView.setVisibility(View.GONE);
+
         }
         // cambiar el estado de que comprueba si se esta mostrando
         isShowingAnswer = !isShowingAnswer;
