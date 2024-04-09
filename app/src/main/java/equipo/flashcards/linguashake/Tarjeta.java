@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.cardview.widget.CardView;
@@ -50,12 +51,19 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         respuestaButton = findViewById(R.id.respuesta_button);
         fraseTextView = findViewById(R.id.frase_textview);
         respuestaTextView = findViewById(R.id.respuesta_textview);
+        ImageButton btnSiguiente = findViewById(R.id.btn_avanzar);
 
         // inicializar la base de datos
         databaseHelper = new DatabaseHelper(this);
 
         mostrarNuevaTarjeta();
 
+        btnSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarNuevaTarjeta();
+            }
+        });
         // si da clic en el btn respuesta
         respuestaButton.setOnClickListener(new View.OnClickListener() {
             @Override

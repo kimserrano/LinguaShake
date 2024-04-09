@@ -31,7 +31,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // tabla para las tarjetas, tiene id, frase y la traduccion que es la respuesta
         db.execSQL("create Table flashcards(id INTEGER PRIMARY KEY AUTOINCREMENT, frase TEXT, respuesta TEXT)");
 
-        // insertarDatosDeEjemplo(db);
+        // descomentareen la linea 35 para que se inserten los datos de las tarjetas, si no no les va a aparecer contenido
+       //  insertarDatosDeEjemplo(db);
     }
 
     @Override
@@ -136,7 +137,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("frase", "How much does it cost?");
         contentValues.put("respuesta", "¿Cuánto cuesta?");
         db.insert("flashcards", null, contentValues);
-
         contentValues.put("frase", "What time is it?");
         contentValues.put("respuesta", "¿Qué hora es?");
         db.insert("flashcards", null, contentValues);
