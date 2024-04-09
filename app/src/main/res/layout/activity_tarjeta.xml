@@ -41,18 +41,34 @@
             android:layout_gravity="center"
             android:layout_marginTop="-100dp"
             android:src="@drawable/logotarjeta"
-            app:layout_constraintBottom_toTopOf="@+id/frase"
+            app:layout_constraintBottom_toTopOf="@+id/frase_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
-            android:id="@+id/frase"
+            android:id="@+id/frase_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:text="May I have the bill \n please?"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/respuesta_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tarjeta_logo" />
+
+        <TextView
+            android:id="@+id/respuesta_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -76,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frase" />
+            app:layout_constraintTop_toBottomOf="@+id/frase_textview" />
 
     </androidx.cardview.widget.CardView>
 

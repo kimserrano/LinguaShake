@@ -3,7 +3,6 @@ package equipo.flashcards.linguashake;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 
@@ -20,19 +20,24 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private Sensor accelerometer;
     private boolean isShaking = false;
     private long lastTimeShakeDetected = 0;
-    //umbral para agitar
+    // umbral para agitar
     private static final float SHAKE_THRESHOLD = 10f;
-    //tiempo que espera despues de agitar, 1 segundo
+    // tiempo que espera despues de agitar, 1 segundo
     private static final int SHAKE_TIMEOUT = 1000;
     private CardView cardView;
     private Button respuestaButton;
+    private TextView fraseTextView;
+    private TextView respuestaTextView;
     private boolean isShowingAnswer = false;
+
+    private DatabaseHelper databaseHelper;
+    private TarjetaObj tarjetaActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarjeta);
-        //se inicia el acelerometro
+        // se inicia el acelerometro
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -43,6 +48,13 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         // obtenemos los elementos del xml
         cardView = findViewById(R.id.cardView);
         respuestaButton = findViewById(R.id.respuesta_button);
+        fraseTextView = findViewById(R.id.frase_textview);
+        respuestaTextView = findViewById(R.id.respuesta_textview);
+
+        // inicializar la base de datos
+        databaseHelper = new DatabaseHelper(this);
+
+        mostrarNuevaTarjeta();
 
         // si da clic en el btn respuesta
         respuestaButton.setOnClickListener(new View.OnClickListener() {
@@ -68,11 +80,11 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         sensorManager.unregisterListener(this);
     }
 
-    //esto se llama cuando el sensor cambia
+    // esto se llama cuando el sensor cambia
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            //toma el tiempo de la sacudida
+            // toma el tiempo de la sacudida
             long currentTime = System.currentTimeMillis();
             // verifica que el haya pasado tiempo desde la ultima sacudida
             if ((currentTime - lastTimeShakeDetected) > SHAKE_TIMEOUT) {
@@ -81,17 +93,17 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
                 float y = event.values[1];
                 float z = event.values[2];
 
-                // calculas la aceleracion menos la gravedad
+                // calcula la aceleración menos la gravedad
                 double acceleration = Math.sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH;
-               // si la aceleracion es mayor al umbral de sacudida
+                // si la aceleración es mayor al umbral de sacudida
                 if (acceleration > SHAKE_THRESHOLD) {
                     // marcar como sacudida
                     if (!isShaking) {
                         isShaking = true;
-                        // volteas la tarjeta
+                        // voltear la tarjeta
                         flipCard();
                     }
-                    // cambias el tiempo de la ultima sacudida
+                    // cambiar el tiempo de la ultima sacudida
                     lastTimeShakeDetected = currentTime;
                 } else {
                     isShaking = false;
@@ -102,8 +114,8 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-       // aqui no se si vayamos a usarlo mas adelante, pero investigue y es x si
-        // el sensor cambia la precision o algo asi
+        // aquí no se si vayamos a usarlo más adelante, pero investigué y es x si
+        // el sensor cambia la precisión o algo así
     }
 
     // para voltear la tarjeta
@@ -119,16 +131,16 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         isShowingAnswer = !isShowingAnswer;
     }
 
-    // este metodo es para la animacion que debe tener el giro
+    // este método es para la animación que debe tener el giro
     private void flip(View view, int animation) {
-        // el view es la card a girar y el animation es el xml de la animacion
+        // el view es la card a girar y el animation es el xml de la animación
         view.animate()
-                // girar 90 grds en y
+                // girar 90 grados en y
                 .rotationY(90)
                 // dura la primera mitad
                 .setDuration(250)
                 .withEndAction(() -> {
-                    // otros 90 grds
+                    // otros 90 grados
                     view.setRotationY(-90);
                     view.animate()
                             .rotationY(0)
@@ -137,4 +149,21 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
                 })
                 .start();
     }
+
+    private void mostrarNuevaTarjeta() {
+        // una nueva tarjeta de la base de datos
+        tarjetaActual = databaseHelper.obtenerProximaTarjeta();
+
+        if (tarjetaActual != null) {
+            // mostrar la frase en el textview
+            fraseTextView.setText(tarjetaActual.getFrase());
+            // reiniciar el estado de mostrar la respuesta
+            isShowingAnswer = false;
+        } else {
+            // si no hay más tarjetas
+            fraseTextView.setText("No hay más tarjetas.");
+            respuestaTextView.setText("");
+        }
+    }
+
 }
