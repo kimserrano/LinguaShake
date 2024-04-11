@@ -15,7 +15,7 @@ public class MenuPrincipal extends AppCompatActivity {
         // si da clic en tarjeta que se pase a esa pantalla
         Button btnTarjeta = findViewById(R.id.tarjetas_button);
         btnTarjeta.setOnClickListener(view ->{
-            Intent intent = new Intent(getApplicationContext(), Tarjeta.class);
+            Intent intent = new Intent(getApplicationContext(), SeleccionarIdioma.class);
             startActivity(intent);
         });
 

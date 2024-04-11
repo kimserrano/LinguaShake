@@ -4,11 +4,17 @@ public class TarjetaObj {
     private int id;
     private String frase;
     private String respuesta;
+    private String idioma;
 
-    public TarjetaObj(int id, String frase, String respuesta) {
+    public TarjetaObj(int id, String frase, String respuesta, String idioma) {
         this.id = id;
         this.frase = frase;
         this.respuesta = respuesta;
+        this.idioma = idioma;
+    }
+
+    public String getIdioma() {
+        return idioma;
     }
 
     public int getId() {

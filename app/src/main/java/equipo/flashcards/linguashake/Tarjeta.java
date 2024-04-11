@@ -186,7 +186,7 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private void mostrarNuevaTarjeta() {
         // si la lista de tarjetas está vacía, obtenemos una nueva lista de la base de datos
         if (listaTarjetas.isEmpty()) {
-            listaTarjetas = databaseHelper.obtenerProximaTarjeta();
+            listaTarjetas = databaseHelper.obtenerProximaTarjeta("ingles");
             // reiniciar el índice de la tarjeta actual
             indexTarjetaActual = 0;
         }

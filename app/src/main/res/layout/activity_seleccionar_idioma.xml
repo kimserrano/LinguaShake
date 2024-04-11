@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SeleccionarIdioma"
+    android:background="@color/azul">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/login_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pregunta"
+            android:text="¿Cómo quieres aprender hoy?"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:layout_marginTop="14dp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Inglés"
+            android:textAllCaps="false"
+            android:id="@+id/ingles_button"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:theme="@style/ButtonTheme.RosaBajito"
+            android:layout_marginTop="30dp"
+            app:cornerRadius="30dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Personalizar"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:id="@+id/personalizar_button"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:theme="@style/ButtonTheme.RosaBajito"
+            app:cornerRadius="30dp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

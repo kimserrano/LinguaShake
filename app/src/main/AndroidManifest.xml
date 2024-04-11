@@ -15,6 +15,12 @@
         android:theme="@style/Theme.LinguaShake"
         tools:targetApi="31">
         <activity
+            android:name=".PersonalizarTarjetas"
+            android:exported="false" />
+        <activity
+            android:name=".SeleccionarIdioma"
+            android:exported="false" />
+        <activity
             android:name=".Tarjeta"
             android:exported="false" />
         <activity
