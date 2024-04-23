@@ -18,6 +18,11 @@ public class MenuPrincipal extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), SeleccionarIdioma.class);
             startActivity(intent);
         });
+        Button btnCuestionario = findViewById(R.id.cuestionarios_button);
+        btnCuestionario.setOnClickListener(view ->{
+            Intent intent = new Intent(getApplicationContext(), SeleccionarIdiomaCuestionario.class);
+            startActivity(intent);
+        });
 
     }
 }
