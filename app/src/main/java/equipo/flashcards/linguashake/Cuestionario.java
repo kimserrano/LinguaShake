@@ -1,16 +1,18 @@
 package equipo.flashcards.linguashake;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Cuestionario extends AppCompatActivity {
-
+    private int respuestasCorrectas = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,18 +21,26 @@ public class Cuestionario extends AppCompatActivity {
         Button btnTarjeta = findViewById(R.id.guardar_button);
         btnTarjeta.setOnClickListener(view ->{
             if (todasLasOpcionesSeleccionadas()) {
-                 Toast.makeText(this, "Cuestionario Terminado exitosamente", Toast.LENGTH_SHORT).show();
-                 regresarPantallaInicio();
+                // Calculamos las respuestas correctas antes de mostrar el resultado
+                calcularRespuestasCorrectas();
+                // Mostramos el resultado al usuario
+                mostrarResultado();
             } else {
-                 Toast.makeText(this, "Por favor, seleccione una opción en todas las preguntas", Toast.LENGTH_SHORT).show();
+                // Mostrar un mensaje de error indicando que todas las opciones deben ser seleccionadas
+                Toast.makeText(this, "Por favor, seleccione una opción en todas las preguntas", Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void regresarPantallaInicio() {
-        Intent intent = new Intent(this, MenuPrincipal.class); // Reemplaza "PantallaInicio" con el nombre de tu actividad de inicio
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        finish();
+    private void mostrarResultado() {
+        String mensaje = "Respuestas correctas: " + respuestasCorrectas;
+        mostrarAlerta(mensaje);
+    }
+
+    private void mostrarAlerta(String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(mensaje)
+                .setPositiveButton("OK", null)
+                .show();
     }
     private boolean todasLasOpcionesSeleccionadas() {
         RadioGroup opcionesGrupo1 = findViewById(R.id.opciones_radio_group);
@@ -45,6 +55,42 @@ public class Cuestionario extends AppCompatActivity {
                 opcionSeleccionadaEnGrupo(opcionesGrupo4) &&
                 opcionSeleccionadaEnGrupo(opcionesGrupo5);
     }
+    private void calcularRespuestasCorrectas() {
+        // Verificar respuestas correctas para la pregunta 1
+        RadioButton radioButtonCorrectoPregunta1 = findViewById(R.id.opcion2_radio_button); // Segundo RadioButton
+        verificarRespuestaCorrecta(radioButtonCorrectoPregunta1, R.id.opcion1_radio_button, R.id.opcion2_radio_button, R.id.opcion3_radio_button);
+
+        // Verificar respuestas correctas para la pregunta 2
+        RadioButton radioButtonCorrectoPregunta2 = findViewById(R.id.opcion1_radio_button2); // Primer RadioButton
+        verificarRespuestaCorrecta(radioButtonCorrectoPregunta2, R.id.opcion1_radio_button2, R.id.opcion2_radio_button2, R.id.opcion3_radio_button2);
+
+        // Verificar respuestas correctas para la pregunta 3
+        RadioButton radioButtonCorrectoPregunta3 = findViewById(R.id.opcion3_radio_button3); // Tercer RadioButton
+        verificarRespuestaCorrecta(radioButtonCorrectoPregunta3, R.id.opcion1_radio_button3, R.id.opcion2_radio_button3, R.id.opcion3_radio_button3);
+
+        // Verificar respuestas correctas para la pregunta 4
+        RadioButton radioButtonCorrectoPregunta4 = findViewById(R.id.opcion2_radio_button4); // Segundo RadioButton
+        verificarRespuestaCorrecta(radioButtonCorrectoPregunta4, R.id.opcion1_radio_button4, R.id.opcion2_radio_button4, R.id.opcion3_radio_button4);
+
+        // Verificar respuestas correctas para la pregunta 5
+        RadioButton radioButtonCorrectoPregunta5 = findViewById(R.id.opcion3_radio_button5); // Tercer RadioButton
+        verificarRespuestaCorrecta(radioButtonCorrectoPregunta5, R.id.opcion1_radio_button5, R.id.opcion2_radio_button5, R.id.opcion3_radio_button5);
+    }
+    private void verificarRespuestaCorrecta(RadioButton radioButtonCorrecto, int... radioButtonIds) {
+        for (int id : radioButtonIds) {
+            RadioButton radioButton = findViewById(id);
+            if (radioButton.isChecked()) {
+                if (radioButton == radioButtonCorrecto) {
+                    respuestasCorrectas++; // Incrementa el contador si la respuesta es correcta
+                    radioButton.setBackgroundColor(Color.GREEN); // Cambia el color de fondo a verde si es correcta
+                } else {
+                    radioButton.setBackgroundColor(Color.RED); // Cambia el color de fondo a rojo si es incorrecta
+                }
+                break;
+            }
+        }
+    }
+
     private boolean opcionSeleccionadaEnGrupo(RadioGroup radioGroup) {
         int totalRadioButtons = radioGroup.getChildCount();
         for (int i = 0; i < totalRadioButtons; i++) {
