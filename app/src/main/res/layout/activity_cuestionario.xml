@@ -38,7 +38,6 @@
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
             </TextView>
 
             <RadioGroup
@@ -241,10 +240,9 @@
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
     <Button
         android:id="@+id/guardar_button"
-        android:layout_width="152dp"
+        android:layout_width="126dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:text="Terminar"
@@ -258,5 +256,34 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/salir"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:text="Salir"
+        android:textAllCaps="false"
+        android:textColor="@color/verde"
+        android:textSize="18sp"
+        android:theme="@style/ButtonTheme.RosaBajito"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guardar_button" />
+
+    <Button
+        android:id="@+id/reintento"
+        android:layout_width="133dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:text="Reintento"
+        android:textAllCaps="false"
+        android:textColor="@color/verde"
+        android:textSize="18sp"
+        android:theme="@style/ButtonTheme.RosaBajito"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".4980"
+        app:layout_constraintStart_toEndOf="@+id/guardar_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

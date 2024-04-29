@@ -19,6 +19,8 @@ public class Cuestionario extends AppCompatActivity {
         setContentView(R.layout.activity_cuestionario);
 
         Button btnTarjeta = findViewById(R.id.guardar_button);
+        Button btnSalir = findViewById(R.id.salir);
+        Button btnReintento = findViewById(R.id.reintento);
         btnTarjeta.setOnClickListener(view ->{
             if (todasLasOpcionesSeleccionadas()) {
                 // Calculamos las respuestas correctas antes de mostrar el resultado
@@ -30,9 +32,19 @@ public class Cuestionario extends AppCompatActivity {
                 Toast.makeText(this, "Por favor, seleccione una opción en todas las preguntas", Toast.LENGTH_SHORT).show();
             }
         });
+        btnSalir.setOnClickListener(view -> {
+            // Volver a la pantalla principal
+            finish();
+        });
+
+        btnReintento.setOnClickListener(view -> {
+            // Deseleccionar todos los RadioButtons y restablecer el color
+            deseleccionarRadioButtons();
+        });
     }
     private void mostrarResultado() {
         String mensaje = "Respuestas correctas: " + respuestasCorrectas;
+        respuestasCorrectas=0;
         mostrarAlerta(mensaje);
     }
 
@@ -41,6 +53,7 @@ public class Cuestionario extends AppCompatActivity {
         builder.setMessage(mensaje)
                 .setPositiveButton("OK", null)
                 .show();
+
     }
     private boolean todasLasOpcionesSeleccionadas() {
         RadioGroup opcionesGrupo1 = findViewById(R.id.opciones_radio_group);
@@ -61,19 +74,19 @@ public class Cuestionario extends AppCompatActivity {
         verificarRespuestaCorrecta(radioButtonCorrectoPregunta1, R.id.opcion1_radio_button, R.id.opcion2_radio_button, R.id.opcion3_radio_button);
 
         // Verificar respuestas correctas para la pregunta 2
-        RadioButton radioButtonCorrectoPregunta2 = findViewById(R.id.opcion1_radio_button2); // Primer RadioButton
+        RadioButton radioButtonCorrectoPregunta2 = findViewById(R.id.opcion2_radio_button2); // Primer RadioButton
         verificarRespuestaCorrecta(radioButtonCorrectoPregunta2, R.id.opcion1_radio_button2, R.id.opcion2_radio_button2, R.id.opcion3_radio_button2);
 
         // Verificar respuestas correctas para la pregunta 3
-        RadioButton radioButtonCorrectoPregunta3 = findViewById(R.id.opcion3_radio_button3); // Tercer RadioButton
+        RadioButton radioButtonCorrectoPregunta3 = findViewById(R.id.opcion2_radio_button3); // Tercer RadioButton
         verificarRespuestaCorrecta(radioButtonCorrectoPregunta3, R.id.opcion1_radio_button3, R.id.opcion2_radio_button3, R.id.opcion3_radio_button3);
 
         // Verificar respuestas correctas para la pregunta 4
-        RadioButton radioButtonCorrectoPregunta4 = findViewById(R.id.opcion2_radio_button4); // Segundo RadioButton
+        RadioButton radioButtonCorrectoPregunta4 = findViewById(R.id.opcion3_radio_button4); // Segundo RadioButton
         verificarRespuestaCorrecta(radioButtonCorrectoPregunta4, R.id.opcion1_radio_button4, R.id.opcion2_radio_button4, R.id.opcion3_radio_button4);
 
         // Verificar respuestas correctas para la pregunta 5
-        RadioButton radioButtonCorrectoPregunta5 = findViewById(R.id.opcion3_radio_button5); // Tercer RadioButton
+        RadioButton radioButtonCorrectoPregunta5 = findViewById(R.id.opcion2_radio_button5); // Tercer RadioButton
         verificarRespuestaCorrecta(radioButtonCorrectoPregunta5, R.id.opcion1_radio_button5, R.id.opcion2_radio_button5, R.id.opcion3_radio_button5);
     }
     private void verificarRespuestaCorrecta(RadioButton radioButtonCorrecto, int... radioButtonIds) {
@@ -88,6 +101,23 @@ public class Cuestionario extends AppCompatActivity {
                 }
                 break;
             }
+        }
+    }
+    private void deseleccionarRadioButtons() {
+        deseleccionarGrupo(R.id.opciones_radio_group);
+        deseleccionarGrupo(R.id.opciones_radio_group2);
+        deseleccionarGrupo(R.id.opciones_radio_group3);
+        deseleccionarGrupo(R.id.opciones_radio_group4);
+        deseleccionarGrupo(R.id.opciones_radio_group5);
+    }
+
+    private void deseleccionarGrupo(int groupId) {
+        RadioGroup radioGroup = findViewById(groupId);
+        int totalRadioButtons = radioGroup.getChildCount();
+        for (int i = 0; i < totalRadioButtons; i++) {
+            RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+            radioButton.setChecked(false); // Deseleccionar RadioButton
+            radioButton.setBackgroundColor(Color.TRANSPARENT); // Restablecer el color de fondo
         }
     }
 
