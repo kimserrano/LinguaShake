@@ -26,9 +26,16 @@
         <activity
             android:name=".Cuestionario"
             android:exported="false" />
+        <!-- actividad "Tarjeta" -->
+        <activity
+            android:name=".Tarjeta"
+            android:exported="true" />
         <activity
             android:name=".MenuPrincipal"
             android:exported="false" />
+        <activity
+            android:name=".ConfigActivity"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -44,6 +51,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+
+
     </application>
 
 </manifest>

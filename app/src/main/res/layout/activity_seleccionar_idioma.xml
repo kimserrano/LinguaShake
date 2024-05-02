@@ -33,16 +33,16 @@
             android:textColor="@color/black"/>
 
         <Button
+            android:id="@+id/ingles_button"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginTop="30dp"
             android:text="Inglés"
             android:textAllCaps="false"
-            android:id="@+id/ingles_button"
-            android:textSize="18sp"
             android:textColor="@color/black"
+            android:textSize="18sp"
             android:theme="@style/ButtonTheme.RosaBajito"
-            android:layout_marginTop="30dp"
-            app:cornerRadius="30dp"/>
+            app:cornerRadius="30dp" />
 
         <Button
             android:layout_width="match_parent"

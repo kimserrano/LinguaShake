@@ -26,12 +26,16 @@
         android:id="@+id/cardView"
         android:layout_width="339dp"
         android:layout_height="556dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
         app:cardBackgroundColor="@color/verde"
         app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tema">
+
 
         <ImageView
             android:id="@+id/tarjeta_logo"
@@ -75,24 +79,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tarjeta_logo" />
 
-    </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/guardar_button"
+            android:layout_width="181dp"
+            android:layout_height="68dp"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="8dp"
+            android:text="Guardar"
+            android:textAllCaps="false"
+            android:textColor="@color/verde"
+            android:textSize="18sp"
+            android:theme="@style/ButtonTheme.RosaBajito"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/respuesta" />
 
-    <Button
-        android:id="@+id/guardar_button"
-        android:layout_width="152dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="52dp"
-        android:text="Guardar"
-        android:textAllCaps="false"
-        android:textColor="@color/verde"
-        android:textSize="18sp"
-        android:theme="@style/ButtonTheme.RosaBajito"
-        app:cornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

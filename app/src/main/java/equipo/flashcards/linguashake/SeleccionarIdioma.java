@@ -12,6 +12,7 @@ public class SeleccionarIdioma extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionar_idioma);
+
         // si da clic en ingles que se pase a esa pantalla
         Button btnTarjeta = findViewById(R.id.ingles_button);
         btnTarjeta.setOnClickListener(view ->{

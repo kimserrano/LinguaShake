@@ -12,17 +12,28 @@ public class MenuPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+
         // si da clic en tarjeta que se pase a esa pantalla
         Button btnTarjeta = findViewById(R.id.tarjetas_button);
         btnTarjeta.setOnClickListener(view ->{
             Intent intent = new Intent(getApplicationContext(), SeleccionarIdioma.class);
             startActivity(intent);
+
         });
         Button btnCuestionario = findViewById(R.id.cuestionarios_button);
         btnCuestionario.setOnClickListener(view ->{
             Intent intent = new Intent(getApplicationContext(), SeleccionarIdiomaCuestionario.class);
             startActivity(intent);
         });
+
+        // Botón para abrir el config de idioma
+        Button btnConfig = findViewById(R.id.config_button);
+        btnConfig.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), ConfigActivity.class);
+            startActivity(intent);
+        });
+
+
 
     }
 }
