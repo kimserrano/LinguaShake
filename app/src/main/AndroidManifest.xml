@@ -21,6 +21,9 @@
             android:name=".SeleccionarIdioma"
             android:exported="false" />
         <activity
+            android:name=".Tarjeta"
+            android:exported="false" />
+        <activity
             android:name=".SeleccionarIdiomaCuestionario"
             android:exported="false" />
         <activity

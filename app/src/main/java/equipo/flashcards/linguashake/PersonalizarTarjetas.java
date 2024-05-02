@@ -1,18 +1,28 @@
 package equipo.flashcards.linguashake;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class PersonalizarTarjetas extends AppCompatActivity {
 
     EditText temaEditText, fraseEditText, respuestaEditText;
-    Button guardarButton;
+    Spinner temaSpinner;
+    Button guardarButton, otroTema;
 
     DatabaseHelper databaseHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +30,29 @@ public class PersonalizarTarjetas extends AppCompatActivity {
         setContentView(R.layout.activity_personalizar_tarjetas);
 
         // agarrar los elementos de la vista
-        temaEditText = findViewById(R.id.tema);
+        temaSpinner = findViewById(R.id.tema_spinner);
         fraseEditText = findViewById(R.id.frase);
         respuestaEditText = findViewById(R.id.respuesta);
         guardarButton = findViewById(R.id.guardar_button);
+        otroTema = findViewById(R.id.nuevo_Tema);
 
         databaseHelper = new DatabaseHelper(this);
+        List<String> idiomas = databaseHelper.obtenerTemasIdiomas();
+        // Crear un ArrayAdapter usando la lista de temas y un diseño predeterminado
+        ArrayAdapter<String> temaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, idiomas);
 
+        // Especificar el diseño a utilizar cuando se despliegan las opciones
+        temaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        temaSpinner.setAdapter(temaAdapter);
+
+
+        otroTema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialogoNuevoTema();
+            }
+        });
+        
         guardarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +63,7 @@ public class PersonalizarTarjetas extends AppCompatActivity {
 
     private void guardarFlashcard() {
         //los valores de los EditText
-        String tema = temaEditText.getText().toString().trim();
+        String tema = temaSpinner.getSelectedItem().toString().trim();
         String frase = fraseEditText.getText().toString().trim();
         String respuesta = respuestaEditText.getText().toString().trim();
 
@@ -67,4 +93,33 @@ public class PersonalizarTarjetas extends AppCompatActivity {
         databaseHelper.close();
         super.onDestroy();
     }
+
+    private void mostrarDialogoNuevoTema() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Nuevo Tema");
+
+        // EditText para que el usuario ingrese el nuevo tema
+        final EditText nuevoTemaEditText = new EditText(this);
+        builder.setView(nuevoTemaEditText);
+
+        // Botón "Aceptar" en el cuadro de diálogo
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String nuevoTema = nuevoTemaEditText.getText().toString().trim();
+                if (!nuevoTema.isEmpty()) {
+                    // Agregar el nuevo tema al Spinner
+                    ((ArrayAdapter<String>) temaSpinner.getAdapter()).add(nuevoTema);
+                    // Seleccionar el nuevo tema en el Spinner
+                    temaSpinner.setSelection(((ArrayAdapter<String>) temaSpinner.getAdapter()).getPosition(nuevoTema));
+                }
+            }
+        });
+
+        // Botón "Cancelar" en el cuadro de diálogo
+        builder.setNegativeButton("Cancelar", null);
+
+        builder.create().show();
+    }
+
 }

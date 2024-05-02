@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".SeleccionarIdioma"
     android:background="@color/azul">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,31 +40,40 @@
             android:layout_marginTop="14dp"
             android:textColor="@color/black"/>
 
-        <Button
+
+        <LinearLayout
+            android:id="@+id/botones_layout"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Inglés"
-            android:textAllCaps="false"
-            android:id="@+id/ingles_button"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:theme="@style/ButtonTheme.RosaBajito"
-            android:layout_marginTop="30dp"
-            app:cornerRadius="30dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_below="@id/login_logo">
+
+        </LinearLayout>
+
+
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Personalizar"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:id="@+id/personalizar_button"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
+            app:cornerRadius="30dp"
             android:theme="@style/ButtonTheme.RosaBajito"
-            app:cornerRadius="30dp"/>
+            android:layout_gravity="center"/>
+
+
 
     </LinearLayout>
 
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

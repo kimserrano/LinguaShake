@@ -185,5 +185,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public List<String> obtenerTemasIdiomas() {
+        List<String> temasIdiomas = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT DISTINCT idioma FROM flashcards", null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    String idioma = cursor.getString(cursor.getColumnIndex("idioma"));
+                    temasIdiomas.add(idioma);
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLiteException e) {
+            Log.e("DatabaseHelper", "Error al obtener temas/idiomas: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return temasIdiomas;
+    }
+
+
 
 }
