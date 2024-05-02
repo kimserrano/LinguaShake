@@ -6,13 +6,23 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class Cuestionario extends AppCompatActivity {
     private int respuestasCorrectas = 0;
+    private int r1 = 0;
+    private int r2 = 0;
+    private int r3 = 0;
+    private int r4 = 0;
+    private int r5 = 0;
+    private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +31,7 @@ public class Cuestionario extends AppCompatActivity {
         Button btnTarjeta = findViewById(R.id.guardar_button);
         Button btnSalir = findViewById(R.id.salir);
         Button btnReintento = findViewById(R.id.reintento);
+        databaseHelper = new DatabaseHelper(this);
         btnTarjeta.setOnClickListener(view ->{
             if (todasLasOpcionesSeleccionadas()) {
                 // Calculamos las respuestas correctas antes de mostrar el resultado
@@ -41,6 +52,7 @@ public class Cuestionario extends AppCompatActivity {
             // Deseleccionar todos los RadioButtons y restablecer el color
             deseleccionarRadioButtons();
         });
+        crearCuestionario();
     }
     private void mostrarResultado() {
         String mensaje = "Respuestas correctas: " + respuestasCorrectas;
@@ -54,6 +66,66 @@ public class Cuestionario extends AppCompatActivity {
                 .setPositiveButton("OK", null)
                 .show();
 
+    }
+    private void crearCuestionario(){
+        List<Pregunta> listaPreguntas= databaseHelper.obtenerPreguntasAleatorias();
+        int vuelta=1;
+        for (Pregunta a :listaPreguntas){
+            if (vuelta==1){
+                TextView pregunta1= findViewById(R.id.pregunta1);
+                pregunta1.setText(a.getTextoPregunta());
+                RadioButton op1 = findViewById(R.id.opcion1_radio_button);
+                op1.setText(a.getOpcion1());
+                RadioButton op2 = findViewById(R.id.opcion2_radio_button);
+                op2.setText(a.getOpcion2());
+                RadioButton op3 = findViewById(R.id.opcion3_radio_button);
+                op3.setText(a.getOpcion3());
+                r1=a.getRespuesta();
+            }
+            if (vuelta==2){
+                TextView pregunta2= findViewById(R.id.pregunta2);
+                pregunta2.setText(a.getTextoPregunta());
+                RadioButton op1 = findViewById(R.id.opcion1_radio_button2);
+                op1.setText(a.getOpcion1());
+                RadioButton op2 = findViewById(R.id.opcion2_radio_button2);
+                op2.setText(a.getOpcion2());
+                RadioButton op3 = findViewById(R.id.opcion3_radio_button2);
+                op3.setText(a.getOpcion3());
+                r2=a.getRespuesta();
+            }
+            if (vuelta==3){
+                TextView pregunta3= findViewById(R.id.pregunta3);
+                pregunta3.setText(a.getTextoPregunta());
+                RadioButton op1 = findViewById(R.id.opcion1_radio_button3);
+                op1.setText(a.getOpcion1());
+                RadioButton op2 = findViewById(R.id.opcion2_radio_button3);
+                op2.setText(a.getOpcion2());
+                RadioButton op3 = findViewById(R.id.opcion3_radio_button3);
+                op3.setText(a.getOpcion3());
+                r3=a.getRespuesta();
+            }if (vuelta==4){
+                TextView pregunta4= findViewById(R.id.pregunta4);
+                pregunta4.setText(a.getTextoPregunta());
+                RadioButton op1 = findViewById(R.id.opcion1_radio_button4);
+                op1.setText(a.getOpcion1());
+                RadioButton op2 = findViewById(R.id.opcion2_radio_button4);
+                op2.setText(a.getOpcion2());
+                RadioButton op3 = findViewById(R.id.opcion3_radio_button4);
+                op3.setText(a.getOpcion3());
+                r4=a.getRespuesta();
+            }if (vuelta==5){
+                TextView pregunta5= findViewById(R.id.pregunta5);
+                pregunta5.setText(a.getTextoPregunta());
+                RadioButton op1 = findViewById(R.id.opcion1_radio_button5);
+                op1.setText(a.getOpcion1());
+                RadioButton op2 = findViewById(R.id.opcion2_radio_button5);
+                op2.setText(a.getOpcion2());
+                RadioButton op3 = findViewById(R.id.opcion3_radio_button5);
+                op3.setText(a.getOpcion3());
+                r5=a.getRespuesta();
+            }
+            vuelta++;
+        }
     }
     private boolean todasLasOpcionesSeleccionadas() {
         RadioGroup opcionesGrupo1 = findViewById(R.id.opciones_radio_group);
@@ -70,30 +142,26 @@ public class Cuestionario extends AppCompatActivity {
     }
     private void calcularRespuestasCorrectas() {
         // Verificar respuestas correctas para la pregunta 1
-        RadioButton radioButtonCorrectoPregunta1 = findViewById(R.id.opcion2_radio_button); // Segundo RadioButton
-        verificarRespuestaCorrecta(radioButtonCorrectoPregunta1, R.id.opcion1_radio_button, R.id.opcion2_radio_button, R.id.opcion3_radio_button);
+        verificarRespuestaCorrecta(r1, R.id.opcion1_radio_button, R.id.opcion2_radio_button, R.id.opcion3_radio_button);
 
         // Verificar respuestas correctas para la pregunta 2
-        RadioButton radioButtonCorrectoPregunta2 = findViewById(R.id.opcion2_radio_button2); // Primer RadioButton
-        verificarRespuestaCorrecta(radioButtonCorrectoPregunta2, R.id.opcion1_radio_button2, R.id.opcion2_radio_button2, R.id.opcion3_radio_button2);
+        verificarRespuestaCorrecta(r2, R.id.opcion1_radio_button2, R.id.opcion2_radio_button2, R.id.opcion3_radio_button2);
 
         // Verificar respuestas correctas para la pregunta 3
-        RadioButton radioButtonCorrectoPregunta3 = findViewById(R.id.opcion2_radio_button3); // Tercer RadioButton
-        verificarRespuestaCorrecta(radioButtonCorrectoPregunta3, R.id.opcion1_radio_button3, R.id.opcion2_radio_button3, R.id.opcion3_radio_button3);
+        verificarRespuestaCorrecta(r3, R.id.opcion1_radio_button3, R.id.opcion2_radio_button3, R.id.opcion3_radio_button3);
 
         // Verificar respuestas correctas para la pregunta 4
-        RadioButton radioButtonCorrectoPregunta4 = findViewById(R.id.opcion3_radio_button4); // Segundo RadioButton
-        verificarRespuestaCorrecta(radioButtonCorrectoPregunta4, R.id.opcion1_radio_button4, R.id.opcion2_radio_button4, R.id.opcion3_radio_button4);
+        verificarRespuestaCorrecta(r4, R.id.opcion1_radio_button4, R.id.opcion2_radio_button4, R.id.opcion3_radio_button4);
 
         // Verificar respuestas correctas para la pregunta 5
-        RadioButton radioButtonCorrectoPregunta5 = findViewById(R.id.opcion2_radio_button5); // Tercer RadioButton
-        verificarRespuestaCorrecta(radioButtonCorrectoPregunta5, R.id.opcion1_radio_button5, R.id.opcion2_radio_button5, R.id.opcion3_radio_button5);
+        verificarRespuestaCorrecta(r5, R.id.opcion1_radio_button5, R.id.opcion2_radio_button5, R.id.opcion3_radio_button5);
     }
-    private void verificarRespuestaCorrecta(RadioButton radioButtonCorrecto, int... radioButtonIds) {
+    private void verificarRespuestaCorrecta(int correcta, int... radioButtonIds) {
+        int vuelta=1;
         for (int id : radioButtonIds) {
             RadioButton radioButton = findViewById(id);
             if (radioButton.isChecked()) {
-                if (radioButton == radioButtonCorrecto) {
+                if (vuelta == correcta) {
                     respuestasCorrectas++; // Incrementa el contador si la respuesta es correcta
                     radioButton.setBackgroundColor(Color.GREEN); // Cambia el color de fondo a verde si es correcta
                 } else {
@@ -101,6 +169,7 @@ public class Cuestionario extends AppCompatActivity {
                 }
                 break;
             }
+            vuelta++;
         }
     }
     private void deseleccionarRadioButtons() {

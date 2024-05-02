@@ -21,13 +21,16 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cuestionario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/pregunta1"
                 android:layout_width="340dp"
-                android:layout_height="79dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:layout_marginTop="72dp"
                 android:background="@drawable/verde_border"
                 android:text="What color is the sky?"
@@ -35,10 +38,9 @@
                 android:textColor="@color/black"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintHorizontal_bias="0.366"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </TextView>
+                app:layout_constraintTop_toTopOf="parent"></TextView>
 
             <RadioGroup
                 android:id="@+id/opciones_radio_group"
@@ -70,12 +72,15 @@
             <TextView
                 android:id="@+id/pregunta2"
                 android:layout_width="340dp"
-                android:layout_height="79dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/verde_border"
                 android:text="What animal says (moo)?"
-                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="25sp"
+                android:textAlignment="center"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.492"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +118,9 @@
             <TextView
                 android:id="@+id/pregunta3"
                 android:layout_width="340dp"
-                android:layout_height="79dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/verde_border"
                 android:text="Which of these is a fruit?"
                 android:textAlignment="center"
@@ -156,7 +163,9 @@
             <TextView
                 android:id="@+id/pregunta4"
                 android:layout_width="340dp"
-                android:layout_height="129dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/verde_border"
                 android:text="What is the name of the big, yellow celestial body that shines in the sky during the day?"
                 android:textAlignment="center"
@@ -199,7 +208,9 @@
             <TextView
                 android:id="@+id/pregunta5"
                 android:layout_width="340dp"
-                android:layout_height="79dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/verde_border"
                 android:text="What do we use to brush our teeth?"
                 android:textAlignment="center"
@@ -238,6 +249,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fork" />
             </RadioGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <Button
