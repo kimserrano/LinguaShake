@@ -7,35 +7,40 @@
     android:background="@color/azul"
     tools:context=".PersonalizarTarjetas">
 
-    <EditText
-        android:id="@+id/tema"
-        android:layout_width="340dp"
-        android:layout_height="79dp"
-        android:layout_marginTop="68dp"
+
+    <Spinner
+        android:id="@+id/tema_spinner"
+        android:layout_width="254dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/verde_border"
-        android:hint="Hey!, ingresa el tema de tu mazo aquí"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nuevo_Tema"
+        android:layout_width="91dp"
+        android:layout_height="69dp"
+        android:text="Otro"
+        android:textAllCaps="false"
+        android:textColor="@color/verde"
+        android:textSize="18sp"
+        android:theme="@style/ButtonTheme.RosaBajito"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="@id/cardView"
+        app:layout_constraintBottom_toBottomOf="@id/tema_spinner"
+       />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="339dp"
+        android:layout_width="370dp"
         android:layout_height="556dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
         app:cardBackgroundColor="@color/verde"
         app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tema">
-
+        app:layout_constraintTop_toBottomOf="@id/tema_spinner">
 
         <ImageView
             android:id="@+id/tarjeta_logo"
@@ -79,23 +84,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tarjeta_logo" />
 
-        <Button
-            android:id="@+id/guardar_button"
-            android:layout_width="181dp"
-            android:layout_height="68dp"
-            android:layout_gravity="bottom|center"
-            android:layout_marginTop="8dp"
-            android:text="Guardar"
-            android:textAllCaps="false"
-            android:textColor="@color/verde"
-            android:textSize="18sp"
-            android:theme="@style/ButtonTheme.RosaBajito"
-            app:cornerRadius="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/respuesta" />
-
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/guardar_button"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:text="Guardar"
+        android:textAllCaps="false"
+        android:textColor="@color/verde"
+        android:textSize="18sp"
+        android:theme="@style/ButtonTheme.RosaBajito"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

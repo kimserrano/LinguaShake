@@ -21,15 +21,14 @@
             android:name=".SeleccionarIdioma"
             android:exported="false" />
         <activity
+            android:name=".Tarjeta"
+            android:exported="false" />
+        <activity
             android:name=".SeleccionarIdiomaCuestionario"
             android:exported="false" />
         <activity
             android:name=".Cuestionario"
             android:exported="false" />
-        <!-- actividad "Tarjeta" -->
-        <activity
-            android:name=".Tarjeta"
-            android:exported="true" />
         <activity
             android:name=".MenuPrincipal"
             android:exported="false" />

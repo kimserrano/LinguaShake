@@ -43,7 +43,17 @@
             android:theme="@style/ButtonTheme.RosaBajito"
             android:layout_marginTop="30dp"
             app:cornerRadius="30dp"/>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Chino mandarín"
+            android:textAllCaps="false"
+            android:id="@+id/chino_button"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:theme="@style/ButtonTheme.RosaBajito"
+            android:layout_marginTop="30dp"
+            app:cornerRadius="30dp"/>
 
 
     </LinearLayout>
