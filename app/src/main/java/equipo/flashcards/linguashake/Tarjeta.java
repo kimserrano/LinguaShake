@@ -188,44 +188,56 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private int indexTarjetaActual = 0;
 
     private void mostrarNuevaTarjeta() {
-        // si la lista de tarjetas está vacía, obtenemos una nueva lista de la base de datos
+        // Si la lista de tarjetas está vacía, obtenemos una nueva lista de la base de datos
         if (listaTarjetas.isEmpty()) {
             listaTarjetas = databaseHelper.obtenerProximaTarjeta(temaSeleccionado);
-            // reiniciar el índice de la tarjeta actual
+            // Reiniciar el índice de la tarjeta actual
             indexTarjetaActual = 0;
         }
 
+        // Verificar si hay tarjetas en la lista y si el índice actual es menor que el tamaño de la lista
         if (!listaTarjetas.isEmpty() && indexTarjetaActual < listaTarjetas.size()) {
-            // tarjeta actual
+            // Obtener la tarjeta actual
             tarjetaActual = listaTarjetas.get(indexTarjetaActual);
 
-            // mostrar la frase en el textview
-            fraseTextView.setText(tarjetaActual.getFrase());
-            // reiniciar el estado de mostrar la respuesta
-            isShowingAnswer = false;
-
-            // incrementar el índice para la próxima tarjeta
+            // Incrementar el índice para la próxima tarjeta
             indexTarjetaActual++;
+
+            // Si la tarjeta está volteada, voltearla de nuevo
+            if (isShowingAnswer) {
+                flipCard();
+            }
+
+            // Mostrar la frase en el TextView
+            fraseTextView.setText(tarjetaActual.getFrase());
+            // Reiniciar el estado de mostrar la respuesta
+            isShowingAnswer = false;
         } else {
-            //no hay más tarjetas
+            // Mensaje indicando que no hay más tarjetas
             fraseTextView.setText("No hay más tarjetas.");
             respuestaTextView.setText("");
         }
     }
 
     private void mostrarTarjetaAnterior() {
-        //verificar si hay tarjetas en la lista y si el índice actual es mayor que cero
+        // Si la tarjeta está volteada, voltearla de nuevo antes de mostrar la tarjeta anterior
+        if (isShowingAnswer) {
+            flipCard();
+            return; // Salir del método después de voltear la tarjeta
+        }
+
+        // Verificar si hay tarjetas en la lista y si el índice actual es mayor que cero
         if (!listaTarjetas.isEmpty() && indexTarjetaActual > 0) {
-            // retroceder a la tarjeta anterior
+            // Retroceder al índice de la tarjeta anterior
             indexTarjetaActual--;
-            // la tarjeta anterior
+            // Obtener la tarjeta anterior
             tarjetaActual = listaTarjetas.get(indexTarjetaActual);
-            // mostrar la tarjeta anterior en el textview
+            // Mostrar la tarjeta anterior en el TextView
             fraseTextView.setText(tarjetaActual.getFrase());
-            // reiniciar el estado de mostrar la respuesta
+            // Reiniciar el estado de mostrar la respuesta
             isShowingAnswer = false;
         } else {
-            // mensaje indicando que no hay más tarjetas anteriores
+            // Mensaje indicando que no hay más tarjetas anteriores
             Toast.makeText(this, "No hay más tarjetas anteriores.", Toast.LENGTH_SHORT).show();
         }
     }
