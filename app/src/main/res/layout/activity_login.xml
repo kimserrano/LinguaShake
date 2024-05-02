@@ -52,14 +52,14 @@
                     android:padding="25dp" />
 
                 <Button
+                    android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
+                    android:layout_marginTop="30dp"
                     android:text="Login"
                     android:textAllCaps="false"
-                    android:id="@+id/login_button"
                     android:textSize="18sp"
-                    android:layout_marginTop="30dp"
-                    app:cornerRadius = "30dp"/>
+                    app:cornerRadius="30dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
