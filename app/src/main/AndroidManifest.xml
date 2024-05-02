@@ -31,9 +31,6 @@
             android:exported="false" />
         <!-- actividad "Tarjeta" -->
         <activity
-            android:name=".Tarjeta"
-            android:exported="true" />
-        <activity
             android:name=".MenuPrincipal"
             android:exported="false" />
         <activity
