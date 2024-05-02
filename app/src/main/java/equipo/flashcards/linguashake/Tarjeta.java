@@ -37,10 +37,14 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private DatabaseHelper databaseHelper;
     private TarjetaObj tarjetaActual;
 
+    private String temaSeleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarjeta);
+        // agarrar el tema del intent
+         temaSeleccionado = getIntent().getStringExtra("tema");
         // se inicia el acelerometro
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -186,7 +190,7 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private void mostrarNuevaTarjeta() {
         // si la lista de tarjetas está vacía, obtenemos una nueva lista de la base de datos
         if (listaTarjetas.isEmpty()) {
-            listaTarjetas = databaseHelper.obtenerProximaTarjeta("ingles");
+            listaTarjetas = databaseHelper.obtenerProximaTarjeta(temaSeleccionado);
             // reiniciar el índice de la tarjeta actual
             indexTarjetaActual = 0;
         }

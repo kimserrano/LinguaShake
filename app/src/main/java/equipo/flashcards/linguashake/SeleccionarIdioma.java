@@ -21,6 +21,7 @@ public class SeleccionarIdioma extends AppCompatActivity {
     ImageView loginLogoImageView;
     Button inglesButton, personalizarButton;
 
+    String temaSeleccionado;
     DatabaseHelper databaseHelper;
 
     @Override
@@ -94,7 +95,9 @@ public class SeleccionarIdioma extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    temaSeleccionado = ((Button) v).getText().toString();
                     Intent intent = new Intent(getApplicationContext(), Tarjeta.class);
+                    intent.putExtra("tema", temaSeleccionado);
                     startActivity(intent);
                 }
             });
