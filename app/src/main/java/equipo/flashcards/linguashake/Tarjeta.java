@@ -2,6 +2,7 @@ package equipo.flashcards.linguashake;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -30,6 +31,8 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
     private static final int SHAKE_TIMEOUT = 1000;
     private CardView cardView;
     private Button respuestaButton;
+
+    private TextView header;
     private TextView fraseTextView;
     private TextView respuestaTextView;
     private boolean isShowingAnswer = false;
@@ -54,6 +57,7 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
             Toast.makeText(this, "No se ha encontrado el sensor de acelerómetro.", Toast.LENGTH_SHORT).show();
         }
         // obtenemos los elementos del xml
+        header = findViewById(R.id.header);
         cardView = findViewById(R.id.cardView);
         respuestaButton = findViewById(R.id.respuesta_button);
         fraseTextView = findViewById(R.id.frase_textview);
@@ -94,6 +98,7 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         super.onResume();
         // enciende el listener del sensor cuando la actividad está en primer plano
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        cargarTextoSegunIdioma();
     }
 
     @Override
@@ -242,6 +247,26 @@ public class Tarjeta extends AppCompatActivity implements SensorEventListener {
         }
     }
 
+    private void cargarTextoSegunIdioma() {
+        // Obtener las preferencias de idioma guardadas
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String idiomaSeleccionado = sharedPreferences.getString("selected_language", "default");
+
+
+
+        // Cambiar el texto del botón "Personalizar" según el idioma seleccionado
+        if (idiomaSeleccionado.equals("English")) {
+            respuestaButton.setText(R.string.botonRespuesta_en);
+            header.setText(R.string.headerActivityTarjeta_en);
+
+
+        } else if (idiomaSeleccionado.equals("Spanish")) {
+            respuestaButton.setText(R.string.botonRespuesta_en);
+            header.setText(R.string.headerActivityTarjeta_es);
+
+        }
+
+    }
 
 
 }

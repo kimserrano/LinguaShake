@@ -1,19 +1,26 @@
 package equipo.flashcards.linguashake;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 public class SeleccionarIdiomaCuestionario extends AppCompatActivity {
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleccionar_idioma_cuestionario);
+        TextView preguntaHeader = findViewById(R.id.preguntaHeader);
         TextView facilInglesTextView = findViewById(R.id.facil_ingles_textview);
         TextView dificilInglesTextView = findViewById(R.id.dificil_ingles_textview);
 
@@ -39,6 +46,7 @@ public class SeleccionarIdiomaCuestionario extends AppCompatActivity {
         });
 
 
+
     }
 
     private void startCuestionarioActivity(String idioma, int dificultad) {
@@ -47,4 +55,9 @@ public class SeleccionarIdiomaCuestionario extends AppCompatActivity {
         intent.putExtra("dificultad", dificultad);
         startActivity(intent);
     }
+
+
+
+
+
 }

@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.SharedPreferences;
+import android.content.Context;
 
 
 import java.util.List;
@@ -52,11 +54,16 @@ public class SeleccionarIdioma extends AppCompatActivity {
 
     //para mostrar los botones en el LinearLayout
     private void mostrarBotones() {
+        // Obtener las preferencias de idioma guardadas
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String idiomaSeleccionado = sharedPreferences.getString("selected_language", "default");
+
         // lista actualizada de temas o idiomas
         List<String> temasIdiomas = databaseHelper.obtenerTemasIdiomas();
 
         // limpiar botónes previos
         botonesLayout.removeAllViews();
+
 
         // agregar botones para cada tema o idioma en la lista
         for (String tema : temasIdiomas) {
@@ -79,6 +86,8 @@ public class SeleccionarIdioma extends AppCompatActivity {
             } else {
                 button.setTextAppearance(this, R.style.ButtonTheme_RosaBajito);
             }
+
+
 
             // Establecer el radio de esquina (cornerRadius)
             GradientDrawable drawable = new GradientDrawable();
@@ -103,7 +112,18 @@ public class SeleccionarIdioma extends AppCompatActivity {
             });
             botonesLayout.addView(button);
         }
+
+        // Cambiar el texto del botón "Personalizar" según el idioma seleccionado
+        if (idiomaSeleccionado.equals("English")) {
+            personalizarButton.setText(R.string.botonAprender_en);
+        } else if (idiomaSeleccionado.equals("Spanish")) {
+            personalizarButton.setText(R.string.botonAprender_es);
+        }
     }
+
+
+
+
 
     @Override
     protected void onDestroy() {

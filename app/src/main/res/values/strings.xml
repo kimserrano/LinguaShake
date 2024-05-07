@@ -1,12 +1,73 @@
 <resources>
     <string name="app_name">LinguaShake</string>
 
+    //String para botones de guardar
+    <string name="guardar_en">Save</string>
+    <string name="guardar_es">Guardar</string>
+
+    <string name="txtIngles_en">English</string>
+    <string name="txtIngles_es">Inglés</string>
+
+    <string name="txtChino_en">Mandarin</string>
+    <string name="txtChino_es">Chino Mandarin</string>
+
+
+    //Strings para el menu principal y sus botones
     <string name="menuprincipal_header_en">How do you want to learn today?</string>
     <string name="menuprincipal_header_es">¿Cómo quieres aprender hoy?</string>
+
     <string name="menuprincipal_tarjetas_en">With cards</string>
     <string name="menuprincipal_tarjetas_es">Con tarjetas</string>
+
     <string name="menuprincipal_cuestionarios_en">With quizzes</string>
     <string name="menuprincipal_cuestionarios_es">Con cuestionarios</string>
+
+
+    //Strings de la config de idioma
+    <string name="headerSeleccioneLeng_en">Select language</string>
+    <string name="headerSeleccioneLeng_es">Seleccione lenguaje</string>
+
+
+    //Strings de personalizar tarjetas
+    <string name="temaTarjetas_en">Other</string>
+    <string name="temaTarjetas_es">Otro</string>
+
+    <string name="preguntaTarjeta_en">Phrase/question here</string>
+    <string name="preguntaTarjeta_es">Ingresa frase/pregunta aquí</string>
+
+    <string name="respuestaTarjeta_en">Answer goes here</string>
+    <string name="respuestaTarjeta_es">Ingresa la respuesta aquí</string>
+
+
+    //Strings de activity select idioma
+    <string name="headerSelectIdioma_en">What do you want to learn today?</string>
+    <string name="headerSelectIdioma_es">¿Qué quieres aprender hoy?</string>
+
+    <string name="botonAprender_en">Customize</string>
+    <string name="botonAprender_es">Personalizar</string>
+
+
+    //Strings de la tarjeta ya personalizada
+    <string name="headerActivityTarjeta_en">Learning \n cards</string>
+    <string name="headerActivityTarjeta_es">Tarjetas de \n aprendizaje</string>
+
+    <string name="botonRespuesta_en">See answer</string>
+    <string name="botonRespuesta_es">Ver respuesta</string>
+
+
+    //Strings de botones y header questionario
+    <string name="headerActivityQuizz_en">Select the quizz language</string>
+    <string name="headerActivityQuizz_es">Elige Idioma Para El Cuestionario</string>
+
+
+    <string name="botonQuizzIngles_en">Learning \n cards</string>
+    <string name="botonQuizzIngles_es">Tarjetas de \n aprendizaje</string>
+
+    <string name="botonDificultadFacil_en">Easy</string>
+    <string name="botonDificultadFacil_es">Fácil</string>
+    <string name="botonDificultadDificil_en">Hard</string>
+    <string name="botonDificultadDificil_es">Difícil</string>
+
 
     <string name="welcome_message">¡Bienvenido!</string>
 

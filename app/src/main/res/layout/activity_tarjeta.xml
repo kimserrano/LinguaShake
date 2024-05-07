@@ -8,11 +8,11 @@
 
 
     <TextView
-        android:id="@+id/titulo"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Tarjetas de \n aprendizaje"
+        android:text="@string/headerActivityTarjeta_en"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_retroceder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titulo"
+        app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="150dp"
-            android:text="ver respuesta"
+            android:text="@string/botonRespuesta_en"
             android:textAllCaps="false"
             android:textColor="@color/verde"
             android:textSize="18sp"

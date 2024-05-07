@@ -4,13 +4,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -121,5 +124,37 @@ public class PersonalizarTarjetas extends AppCompatActivity {
 
         builder.create().show();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarTextoSegunIdioma();
+    }
+
+
+    private void cargarTextoSegunIdioma() {
+        // Obtener las preferencias de idioma guardadas
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String idiomaSeleccionado = sharedPreferences.getString("selected_language", "default");
+
+
+        // Cambiar el texto del botón "Personalizar" según el idioma seleccionado
+        if (idiomaSeleccionado.equals("English")) {
+            otroTema.setText(R.string.temaTarjetas_en);
+            fraseEditText.setText(R.string.preguntaTarjeta_en);
+            respuestaEditText.setText(R.string.respuestaTarjeta_en);
+            guardarButton.setText(R.string.guardar_en);
+
+        } else if (idiomaSeleccionado.equals("Spanish")) {
+            otroTema.setText(R.string.temaTarjetas_es);
+            fraseEditText.setText(R.string.preguntaTarjeta_es);
+            respuestaEditText.setText(R.string.respuestaTarjeta_es);
+            guardarButton.setText(R.string.guardar_es);
+        }
+    }
+
+
+
+
 
 }

@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Button;
+
 import android.widget.CompoundButton;
 import android.text.InputType;
 
@@ -54,22 +59,19 @@ public class SingupActivity extends AppCompatActivity {
                 String password = binding.singupPassword.getText().toString();
                 String confirmPassword = binding.singupConfirm.getText().toString();
 
-                // Validación de formato de correo electrónico
                 if (!isValidEmail(email)) {
-                    Toast.makeText(SingupActivity.this, "Formato de correo inválido", Toast.LENGTH_SHORT).show();
+                    dialogoError("Formato de correo inválido");
                     return;
                 }
 
-                // Validación de longitud mínima de contraseña
                 if (password.length() < 8) {
-                    Toast.makeText(SingupActivity.this, "La contraseña debe tener al menos 8 caracteres.", Toast.LENGTH_SHORT).show();
+                    dialogoError("La contraseña debe tener al menos 8 caracteres.");
                     return;
                 }
 
-                // Validación de complejidad de contraseña
                 String missingRequirements = getMissingRequirements(password);
                 if (!missingRequirements.isEmpty()) {
-                    Toast.makeText(SingupActivity.this, "La contraseña falta: " + missingRequirements, Toast.LENGTH_SHORT).show();
+                    dialogoError("La contraseña falta: " + missingRequirements);
                     return;
                 }
 
@@ -130,20 +132,6 @@ public class SingupActivity extends AppCompatActivity {
         return email.matches(emailPattern);
     }
 
- /*   // Método para validar la complejidad de la contraseña
-    private boolean isValidPassword(String password) {
-        String passwordPattern =
-                //Lo que la contraseña pide tener
-                "^(?=.*[0-9])" + //al menos un número
-                        "(?=.*[a-z])" +  //al menos una letra minúscula
-                        "(?=.*[A-Z])" +  //al menos una letra mayúscula
-                        "(?=.*[@!#$%^&+=*-_.])" + // al menos un carácter especial (incluyendo los caracteres !#$%^&+=)
-                        "(?=\\S+$)" + // Sin espacios en blanco
-                        ".{8,}$"; //finalmente debe de ser al menos 8 caracteres
-
-        return password.matches(passwordPattern);
-    }
-*/
 
 
     // Método para validar la complejidad de la contraseña
@@ -178,6 +166,27 @@ public class SingupActivity extends AppCompatActivity {
 
         return missingRequirements.toString();
     }
+
+    private void dialogoError(String errorMessage) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_error, null);
+        builder.setView(dialogView);
+
+        TextView errorMessageTextView = dialogView.findViewById(R.id.errorMessageTextView);
+        errorMessageTextView.setText(errorMessage);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        Button closeButton = dialogView.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 
 
 }
