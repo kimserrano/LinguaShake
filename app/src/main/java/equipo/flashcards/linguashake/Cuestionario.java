@@ -21,6 +21,8 @@ public class Cuestionario extends AppCompatActivity {
     private int r3 = 0;
     private int r4 = 0;
     private int r5 = 0;
+    private String idi= "";
+    private int difi = 0;
     private DatabaseHelper databaseHelper;
 
     @Override
@@ -31,6 +33,9 @@ public class Cuestionario extends AppCompatActivity {
         Button btnTarjeta = findViewById(R.id.guardar_button);
         Button btnSalir = findViewById(R.id.salir);
         Button btnReintento = findViewById(R.id.reintento);
+         idi = getIntent().getStringExtra("idioma");
+         difi = getIntent().getIntExtra("dificultad",1);
+
         databaseHelper = new DatabaseHelper(this);
         btnTarjeta.setOnClickListener(view ->{
             if (todasLasOpcionesSeleccionadas()) {
@@ -68,42 +73,49 @@ public class Cuestionario extends AppCompatActivity {
 
     }
     private void crearCuestionario(){
-        List<Pregunta> listaPreguntas= databaseHelper.obtenerPreguntasAleatorias();
+        List<Pregunta> listaPreguntas= databaseHelper.obtenerPreguntasAleatorias(idi,difi);
         int vuelta=1;
         for (Pregunta a :listaPreguntas){
             if (vuelta==1){
-                TextView pregunta1= findViewById(R.id.pregunta1);
-                pregunta1.setText(a.getTextoPregunta());
-                RadioButton op1 = findViewById(R.id.opcion1_radio_button);
-                op1.setText(a.getOpcion1());
-                RadioButton op2 = findViewById(R.id.opcion2_radio_button);
-                op2.setText(a.getOpcion2());
-                RadioButton op3 = findViewById(R.id.opcion3_radio_button);
-                op3.setText(a.getOpcion3());
-                r1=a.getRespuesta();
+                if(a!=null) {
+                    TextView pregunta1 = findViewById(R.id.pregunta1);
+                    pregunta1.setText(a.getTextoPregunta());
+                    RadioButton op1 = findViewById(R.id.opcion1_radio_button);
+                    op1.setText(a.getOpcion1());
+                    RadioButton op2 = findViewById(R.id.opcion2_radio_button);
+                    op2.setText(a.getOpcion2());
+                    RadioButton op3 = findViewById(R.id.opcion3_radio_button);
+                    op3.setText(a.getOpcion3());
+                    r1 = a.getRespuesta();
+                }
             }
             if (vuelta==2){
-                TextView pregunta2= findViewById(R.id.pregunta2);
-                pregunta2.setText(a.getTextoPregunta());
-                RadioButton op1 = findViewById(R.id.opcion1_radio_button2);
-                op1.setText(a.getOpcion1());
-                RadioButton op2 = findViewById(R.id.opcion2_radio_button2);
-                op2.setText(a.getOpcion2());
-                RadioButton op3 = findViewById(R.id.opcion3_radio_button2);
-                op3.setText(a.getOpcion3());
-                r2=a.getRespuesta();
+                if(a!=null) {
+                    TextView pregunta2 = findViewById(R.id.pregunta2);
+                    pregunta2.setText(a.getTextoPregunta());
+                    RadioButton op1 = findViewById(R.id.opcion1_radio_button2);
+                    op1.setText(a.getOpcion1());
+                    RadioButton op2 = findViewById(R.id.opcion2_radio_button2);
+                    op2.setText(a.getOpcion2());
+                    RadioButton op3 = findViewById(R.id.opcion3_radio_button2);
+                    op3.setText(a.getOpcion3());
+                    r2 = a.getRespuesta();
+                }
             }
             if (vuelta==3){
-                TextView pregunta3= findViewById(R.id.pregunta3);
-                pregunta3.setText(a.getTextoPregunta());
-                RadioButton op1 = findViewById(R.id.opcion1_radio_button3);
-                op1.setText(a.getOpcion1());
-                RadioButton op2 = findViewById(R.id.opcion2_radio_button3);
-                op2.setText(a.getOpcion2());
-                RadioButton op3 = findViewById(R.id.opcion3_radio_button3);
-                op3.setText(a.getOpcion3());
-                r3=a.getRespuesta();
+                if(a!=null) {
+                    TextView pregunta3 = findViewById(R.id.pregunta3);
+                    pregunta3.setText(a.getTextoPregunta());
+                    RadioButton op1 = findViewById(R.id.opcion1_radio_button3);
+                    op1.setText(a.getOpcion1());
+                    RadioButton op2 = findViewById(R.id.opcion2_radio_button3);
+                    op2.setText(a.getOpcion2());
+                    RadioButton op3 = findViewById(R.id.opcion3_radio_button3);
+                    op3.setText(a.getOpcion3());
+                    r3 = a.getRespuesta();
+                }
             }if (vuelta==4){
+                if(a!=null){
                 TextView pregunta4= findViewById(R.id.pregunta4);
                 pregunta4.setText(a.getTextoPregunta());
                 RadioButton op1 = findViewById(R.id.opcion1_radio_button4);
@@ -113,16 +125,20 @@ public class Cuestionario extends AppCompatActivity {
                 RadioButton op3 = findViewById(R.id.opcion3_radio_button4);
                 op3.setText(a.getOpcion3());
                 r4=a.getRespuesta();
+                }
             }if (vuelta==5){
                 TextView pregunta5= findViewById(R.id.pregunta5);
-                pregunta5.setText(a.getTextoPregunta());
-                RadioButton op1 = findViewById(R.id.opcion1_radio_button5);
-                op1.setText(a.getOpcion1());
-                RadioButton op2 = findViewById(R.id.opcion2_radio_button5);
-                op2.setText(a.getOpcion2());
-                RadioButton op3 = findViewById(R.id.opcion3_radio_button5);
-                op3.setText(a.getOpcion3());
-                r5=a.getRespuesta();
+                if(a!=null){
+                    pregunta5.setText(a.getTextoPregunta());
+                    RadioButton op1 = findViewById(R.id.opcion1_radio_button5);
+                    op1.setText(a.getOpcion1());
+                    RadioButton op2 = findViewById(R.id.opcion2_radio_button5);
+                    op2.setText(a.getOpcion2());
+                    RadioButton op3 = findViewById(R.id.opcion3_radio_button5);
+                    op3.setText(a.getOpcion3());
+                    r5=a.getRespuesta();
+                }
+
             }
             vuelta++;
         }

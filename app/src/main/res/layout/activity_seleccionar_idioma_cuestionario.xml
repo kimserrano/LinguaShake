@@ -32,28 +32,107 @@
             android:layout_marginTop="14dp"
             android:textColor="@color/black"/>
 
-        <Button
+
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Inglés"
-            android:textAllCaps="false"
-            android:id="@+id/ingles_button"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:theme="@style/ButtonTheme.RosaBajito"
-            android:layout_marginTop="30dp"
-            app:cornerRadius="30dp"/>
-        <Button
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:background="@drawable/rounded_corners"
+
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/ingles_textview"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Inglés"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/facil_ingles_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Fácil"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@drawable/buttondificulty"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/dificil_ingles_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Difícil"
+                android:textSize="18sp"
+                android:background="@drawable/buttondificulty"
+
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="Chino mandarín"
-            android:textAllCaps="false"
-            android:id="@+id/chino_button"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:theme="@style/ButtonTheme.RosaBajito"
-            android:layout_marginTop="30dp"
-            app:cornerRadius="30dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:background="@drawable/rounded_corners"
+
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/chino_textview"
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Chino mandarín"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/facil_chino_textview"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Fácil"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@drawable/buttondificulty"
+                android:layout_marginEnd="5dp"/>
+
+            <TextView
+                android:id="@+id/dificil_chino_textview"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/buttondificulty"
+                android:gravity="center"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Difícil"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
 
 
     </LinearLayout>
