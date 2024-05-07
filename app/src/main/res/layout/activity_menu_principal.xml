@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pregunta"
-            android:text="¿Cómo quieres aprender hoy?"
+            android:text="@string/menuprincipal_header_en"
             android:layout_gravity="center"
             android:padding="8dp"
             android:textSize="18sp"
@@ -35,7 +35,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Con tarjetas"
+            android:text="@string/menuprincipal_tarjetas_en"
             android:textAllCaps="false"
             android:id="@+id/tarjetas_button"
             android:textSize="18sp"
@@ -45,7 +45,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:text="Con cuestionarios"
+            android:text="@string/menuprincipal_cuestionarios_en"
             android:textAllCaps="false"
             android:id="@+id/cuestionarios_button"
             android:textSize="18sp"

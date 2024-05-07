@@ -47,7 +47,11 @@ public class ConfigActivity extends AppCompatActivity {
                 showToast("Idioma guardado: Spanish"); // Mostrar un Toast
             }
             editor.apply();
+
+            // Cerrar la actividad actual y volver a cargar la actividad anterior
+            finish();
         });
+
 
         // Verificar si hay una selección previa y establecer el estado de los radio buttons en consecuencia
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);

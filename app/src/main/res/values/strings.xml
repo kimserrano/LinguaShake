@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">LinguaShake</string>
+
+    <string name="menuprincipal_header_en">How do you want to learn today?</string>
+    <string name="menuprincipal_header_es">¿Cómo quieres aprender hoy?</string>
+    <string name="menuprincipal_tarjetas_en">With cards</string>
+    <string name="menuprincipal_tarjetas_es">Con tarjetas</string>
+    <string name="menuprincipal_cuestionarios_en">With quizzes</string>
+    <string name="menuprincipal_cuestionarios_es">Con cuestionarios</string>
+
+    <string name="welcome_message">¡Bienvenido!</string>
+
 </resources>
+
+
